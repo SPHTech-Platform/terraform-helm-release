@@ -5,5 +5,5 @@ output "helm_release" {
 
 output "release_metadata" {
   description = "Map of attributes of the Helm release metadata"
-  value       = try(helm_release.this[0].metadata, null)
+  value       = try(helm_release.this.metadata, null)
 }
