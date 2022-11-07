@@ -2,14 +2,11 @@ resource "helm_release" "this" {
   name  = var.helm_config.name
   chart = var.helm_config.chart
 
-
   repository       = try(var.helm_config.repository, null)
   version          = try(var.helm_config.verson, null)
   namespace        = try(var.helm_config.namespace, "default")
   create_namespace = try(var.helm_config.create_namespace, false)
   description      = try(var.helm_config.description, "")
-
-
 
   repository_key_file  = try(var.helm_config.repository_key_file, "")
   repository_cert_file = try(var.helm_config.repository_cert_file, "")
@@ -36,7 +33,6 @@ resource "helm_release" "this" {
   dependency_update          = try(var.helm_config.dependency_update, false)
   replace                    = try(var.helm_config.replace, false)
   lint                       = try(var.helm_config.lint, false)
-
 
   values = try(var.helm_config.values, null)
   dynamic "set" {
