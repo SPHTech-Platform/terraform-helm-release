@@ -1,4 +1,6 @@
-# Terraform Modules Template
+# Helm release module
+
+Helm release module can be used to provision a generic Helm Chart as an Add-On for an EKS cluster.
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
