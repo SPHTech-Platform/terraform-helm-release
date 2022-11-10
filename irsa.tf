@@ -18,6 +18,7 @@ module "irsa_role" {
 
 resource "kubernetes_namespace" "irsa" {
   count = local.create_namespace ? 1 : 0
+
   metadata {
     name = var.irsa_config.kubernetes_namespace
   }
