@@ -37,6 +37,6 @@ variable "irsa_config" {
 
 variable "tags" {
   description = "A map of tags to add the the IAM role"
-  type        = map(any)
+  type        = map(string)
   default     = {}
 }
