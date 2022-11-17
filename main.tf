@@ -9,9 +9,10 @@ resource "helm_release" "this" {
 
   repository       = try(var.helm_config.repository, null)
   version          = try(var.helm_config.verson, null)
-  namespace        = length(var.irsa_config) > 0 ? try(var.irsa_config.kubernetes_namespace, "default") : try(var.helm_config.namespace, "default")
-  create_namespace = length(var.irsa_config) > 0 ? false : try(var.helm_config.create_namespace, false)
-  description      = try(var.helm_config.description, "")
+  namespace        = var.irsa_config.kubernetes_namespace != "" ? var.irsa_config.kubernetes_namespace : try(var.helm_config.namespace, "default")
+  create_namespace = var.irsa_config.create_kubernetes_namespace ? false : try(var.helm_config.create_namespace, false)
+
+  description = try(var.helm_config.description, "")
 
   repository_key_file  = try(var.helm_config.repository_key_file, "")
   repository_cert_file = try(var.helm_config.repository_cert_file, "")
