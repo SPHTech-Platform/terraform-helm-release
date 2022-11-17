@@ -6,7 +6,7 @@ module "irsa_role" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
   version = "~> 5.5.0"
 
-  create_role = var.irsa_config.role_policy_arns != null
+  create_role = var.irsa_config.role_name != ""
   role_name   = var.irsa_config.role_name
 
   oidc_providers = var.irsa_config.oidc_providers

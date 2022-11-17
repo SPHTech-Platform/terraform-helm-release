@@ -24,10 +24,10 @@ variable "set_sensitive_values" {
 variable "irsa_config" {
   description = "Input configuration for IRSA module"
   type = object({
-    role_name                         = optional(string)
-    role_policy_arns                  = optional(map(string), null)
-    create_kubernetes_namespace       = optional(bool, true)
-    create_kubernetes_service_account = optional(bool, true)
+    role_name                         = optional(string, "")
+    role_policy_arns                  = optional(map(string), {})
+    create_kubernetes_namespace       = optional(bool, false)
+    create_kubernetes_service_account = optional(bool, false)
     kubernetes_namespace              = optional(string, "")
     kubernetes_service_account        = optional(string, "")
     oidc_providers                    = optional(any, null)
