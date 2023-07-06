@@ -8,7 +8,7 @@ resource "helm_release" "this" {
   chart = var.helm_config.chart
 
   repository       = try(var.helm_config.repository, null)
-  version          = try(var.helm_config.verson, null)
+  version          = try(var.helm_config.version, null)
   namespace        = var.irsa_config.kubernetes_namespace != "" ? var.irsa_config.kubernetes_namespace : try(var.helm_config.namespace, "default")
   create_namespace = var.irsa_config.create_kubernetes_namespace ? false : try(var.helm_config.create_namespace, false)
 
