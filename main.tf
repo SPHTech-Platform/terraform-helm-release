@@ -63,6 +63,16 @@ resource "helm_release" "this" {
     }
   }
 
+  dynamic "set_list" {
+    iterator = each_item
+    for_each = try(var.helm_config.set_list, null) != null ? concat(var.helm_config.set_list, var.set_list_values) : var.set_list_values
+
+    content {
+      name  = each_item.value.name
+      value = each_item.value.value
+    }
+  }
+
   postrender {
     binary_path = try(var.helm_config.postrender, "")
   }
