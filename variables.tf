@@ -18,6 +18,11 @@ variable "set_sensitive_values" {
   default     = []
 }
 
+variable "set_list_values" {
+  description = "Forced set_list values"
+  type        = any
+  default     = []
+}
 #######
 # IRSA
 #######
