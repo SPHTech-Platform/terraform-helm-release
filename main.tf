@@ -40,40 +40,10 @@ resource "helm_release" "this" {
   replace                    = try(var.helm_config.replace, false)
   lint                       = try(var.helm_config.lint, false)
 
-  values = try(var.helm_config.values, null)
-  dynamic "set" {
-    iterator = each_item
-    for_each = try(var.helm_config.set, null) != null ? distinct(concat(var.set_values, var.helm_config.set)) : var.set_values
+  values        = try(var.helm_config.values, null)
+  set           = try(var.helm_config.set, null) != null ? distinct(concat(var.set_values, var.helm_config.set)) : var.set_values
+  set_sensitive = try(var.helm_config.set_sensitive, null) != null ? concat(var.helm_config.set_sensitive, var.set_sensitive_values) : var.set_sensitive_values
+  set_list      = try(var.helm_config.set_list, null) != null ? concat(var.helm_config.set_list, var.set_list_values) : var.set_list_values
 
-    content {
-      name  = each_item.value.name
-      value = each_item.value.value
-      type  = try(each_item.value.type, null)
-    }
-  }
-
-  dynamic "set_sensitive" {
-    iterator = each_item
-    for_each = try(var.helm_config.set_sensitive, null) != null ? concat(var.helm_config.set_sensitive, var.set_sensitive_values) : var.set_sensitive_values
-
-    content {
-      name  = each_item.value.name
-      value = each_item.value.value
-      type  = try(each_item.value.type, null)
-    }
-  }
-
-  dynamic "set_list" {
-    iterator = each_item
-    for_each = try(var.helm_config.set_list, null) != null ? concat(var.helm_config.set_list, var.set_list_values) : var.set_list_values
-
-    content {
-      name  = each_item.value.name
-      value = each_item.value.value
-    }
-  }
-
-  postrender {
-    binary_path = try(var.helm_config.postrender, "")
-  }
+  postrender = try(var.helm_config.postrender, null) != null ? concat(var.helm_config.postrender, var.postrender_config) : var.postrender_config
 }
