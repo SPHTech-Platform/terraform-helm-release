@@ -54,22 +54,22 @@ Helm release module can be used to provision a generic Helm Chart as an Add-On f
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
-| <a name="requirement_helm"></a> [helm](#requirement\_helm) | >= 2.15.0 |
-| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | >= 2.32.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5 |
+| <a name="requirement_helm"></a> [helm](#requirement\_helm) | >= 3.0.2 |
+| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | >= 2.38.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_helm"></a> [helm](#provider\_helm) | >= 2.15.0 |
-| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | >= 2.32.0 |
+| <a name="provider_helm"></a> [helm](#provider\_helm) | >= 3.0.2 |
+| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | >= 2.38.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_irsa_role"></a> [irsa\_role](#module\_irsa\_role) | terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks | ~> 5.5.0 |
+| <a name="module_irsa_role"></a> [irsa\_role](#module\_irsa\_role) | terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts | ~> 6.0 |
 
 ## Resources
 
@@ -84,7 +84,8 @@ Helm release module can be used to provision a generic Helm Chart as an Add-On f
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_helm_config"></a> [helm\_config](#input\_helm\_config) | Helm chart config. Repository and version required. See https://registry.terraform.io/providers/hashicorp/helm/latest/docs | `any` | n/a | yes |
-| <a name="input_irsa_config"></a> [irsa\_config](#input\_irsa\_config) | Input configuration for IRSA module | <pre>object({<br>    role_name                         = optional(string, "")<br>    role_policy_arns                  = optional(map(string), {})<br>    create_kubernetes_namespace       = optional(bool, false)<br>    create_kubernetes_service_account = optional(bool, false)<br>    kubernetes_namespace              = optional(string, "")<br>    kubernetes_service_account        = optional(string, "")<br>    oidc_providers                    = optional(any, null)<br>  })</pre> | `{}` | no |
+| <a name="input_irsa_config"></a> [irsa\_config](#input\_irsa\_config) | Input configuration for IRSA module | <pre>object({<br/>    name                              = optional(string, "")<br/>    policies                          = optional(map(string), {})<br/>    create_kubernetes_namespace       = optional(bool, false)<br/>    create_kubernetes_service_account = optional(bool, false)<br/>    kubernetes_namespace              = optional(string, "")<br/>    kubernetes_service_account        = optional(string, "")<br/>    oidc_providers                    = optional(any, null)<br/>  })</pre> | `{}` | no |
+| <a name="input_postrender_config"></a> [postrender\_config](#input\_postrender\_config) | Postrender command configuration | `any` | `[]` | no |
 | <a name="input_set_list_values"></a> [set\_list\_values](#input\_set\_list\_values) | Forced set\_list values | `any` | `[]` | no |
 | <a name="input_set_sensitive_values"></a> [set\_sensitive\_values](#input\_set\_sensitive\_values) | Forced set\_sensitive values | `any` | `[]` | no |
 | <a name="input_set_values"></a> [set\_values](#input\_set\_values) | Forced set values | `any` | `[]` | no |
