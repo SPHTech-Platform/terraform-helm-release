@@ -34,7 +34,7 @@ resource "kubernetes_service_account" "this" {
   metadata {
     name        = var.irsa_config.kubernetes_service_account
     namespace   = try(kubernetes_namespace.irsa[0].metadata[0].name, var.irsa_config.kubernetes_namespace)
-    annotations = var.irsa_config.role_policy_arns != null ? { "eks.amazonaws.com/role-arn" : module.irsa_role.iam_role_arn } : null
+    annotations = var.irsa_config.policies != null ? { "eks.amazonaws.com/role-arn" : module.irsa_role.arn } : null
   }
 
   automount_service_account_token = true
