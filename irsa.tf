@@ -3,16 +3,16 @@ locals {
 }
 
 module "irsa_role" {
-  source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
-  version = "~> 5.59"
+  source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts"
+  version = "~> 6.0"
 
-  create_role = var.irsa_config.role_name != ""
-  role_name   = var.irsa_config.role_name
+  create = var.irsa_config.name != "" ? true : false
+  name   = var.irsa_config.name
 
   oidc_providers = var.irsa_config.oidc_providers
 
-  role_policy_arns = var.irsa_config.role_policy_arns
-  tags             = var.tags
+  policies = var.irsa_config.policies
+  tags     = var.tags
 }
 
 
