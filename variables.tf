@@ -24,12 +24,6 @@ variable "set_list_values" {
   default     = []
 }
 
-variable "postrender_config" {
-  description = "Postrender command configuration"
-  type        = any
-  default     = []
-}
-
 #######
 # IRSA
 #######

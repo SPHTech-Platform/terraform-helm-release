@@ -44,6 +44,4 @@ resource "helm_release" "this" {
   set           = try(var.helm_config.set, null) != null ? distinct(concat(var.set_values, var.helm_config.set)) : var.set_values
   set_sensitive = try(var.helm_config.set_sensitive, null) != null ? concat(var.helm_config.set_sensitive, var.set_sensitive_values) : var.set_sensitive_values
   set_list      = try(var.helm_config.set_list, null) != null ? concat(var.helm_config.set_list, var.set_list_values) : var.set_list_values
-
-  postrender = try(var.helm_config.postrender, null) != null ? concat(var.helm_config.postrender, var.postrender_config) : var.postrender_config
 }
