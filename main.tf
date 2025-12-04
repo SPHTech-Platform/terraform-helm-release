@@ -20,7 +20,7 @@ resource "helm_release" "this" {
   repository_password  = try(var.helm_config.repository_password, "")
 
   verify                = try(var.helm_config.verify, false)
-  keyring               = try(var.helm_config.keyring, "")
+  keyring               = try(var.helm_config.keyring, null)
   timeout               = try(var.helm_config.timeout, 1200)
   disable_webhooks      = try(var.helm_config.disable_webhooks, false)
   reuse_values          = try(var.helm_config.reuse_values, false)
