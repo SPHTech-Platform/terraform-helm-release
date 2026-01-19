@@ -76,8 +76,8 @@ Helm release module can be used to provision a generic Helm Chart as an Add-On f
 | Name | Type |
 |------|------|
 | [helm_release.this](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release) | resource |
-| [kubernetes_namespace.irsa](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace) | resource |
-| [kubernetes_service_account.this](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/service_account) | resource |
+| [kubernetes_namespace_v1.irsa](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace_v1) | resource |
+| [kubernetes_service_account_v1.this](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/service_account_v1) | resource |
 
 ## Inputs
 
@@ -85,7 +85,6 @@ Helm release module can be used to provision a generic Helm Chart as an Add-On f
 |------|-------------|------|---------|:--------:|
 | <a name="input_helm_config"></a> [helm\_config](#input\_helm\_config) | Helm chart config. Repository and version required. See https://registry.terraform.io/providers/hashicorp/helm/latest/docs | `any` | n/a | yes |
 | <a name="input_irsa_config"></a> [irsa\_config](#input\_irsa\_config) | Input configuration for IRSA module | <pre>object({<br/>    name                              = optional(string, "")<br/>    policies                          = optional(map(string), {})<br/>    create_kubernetes_namespace       = optional(bool, false)<br/>    create_kubernetes_service_account = optional(bool, false)<br/>    kubernetes_namespace              = optional(string, "")<br/>    kubernetes_service_account        = optional(string, "")<br/>    oidc_providers                    = optional(any, null)<br/>  })</pre> | `{}` | no |
-| <a name="input_postrender_config"></a> [postrender\_config](#input\_postrender\_config) | Postrender command configuration | `any` | `[]` | no |
 | <a name="input_set_list_values"></a> [set\_list\_values](#input\_set\_list\_values) | Forced set\_list values | `any` | `[]` | no |
 | <a name="input_set_sensitive_values"></a> [set\_sensitive\_values](#input\_set\_sensitive\_values) | Forced set\_sensitive values | `any` | `[]` | no |
 | <a name="input_set_values"></a> [set\_values](#input\_set\_values) | Forced set values | `any` | `[]` | no |

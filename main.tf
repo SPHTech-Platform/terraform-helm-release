@@ -1,7 +1,7 @@
 resource "helm_release" "this" {
   # When irsa config defined, service account needs to be created and passed via helm_config
   depends_on = [
-    kubernetes_service_account.this
+    kubernetes_service_account_v1.this
   ]
 
   name  = var.helm_config.name
