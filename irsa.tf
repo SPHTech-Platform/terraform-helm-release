@@ -8,7 +8,7 @@ module "irsa_role" {
 
   create          = var.irsa_config.name != "" ? true : false
   name            = var.irsa_config.name
-  use_name_prefix = false
+  use_name_prefix = var.irsa_config.use_name_prefix
 
   oidc_providers = var.irsa_config.oidc_providers
 

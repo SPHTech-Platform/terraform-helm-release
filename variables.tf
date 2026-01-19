@@ -31,6 +31,7 @@ variable "irsa_config" {
   description = "Input configuration for IRSA module"
   type = object({
     name                              = optional(string, "")
+    use_name_prefix                   = optional(bool, false)
     policies                          = optional(map(string), {})
     create_kubernetes_namespace       = optional(bool, false)
     create_kubernetes_service_account = optional(bool, false)
