@@ -6,8 +6,9 @@ module "irsa_role" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts"
   version = "~> 6.0"
 
-  create = var.irsa_config.name != "" ? true : false
-  name   = var.irsa_config.name
+  create          = var.irsa_config.name != "" ? true : false
+  name            = var.irsa_config.name
+  use_name_prefix = var.irsa_config.use_name_prefix
 
   oidc_providers = var.irsa_config.oidc_providers
 
@@ -16,7 +17,7 @@ module "irsa_role" {
 }
 
 
-resource "kubernetes_namespace" "irsa" {
+resource "kubernetes_namespace_v1" "irsa" {
   count = local.create_namespace ? 1 : 0
 
   metadata {
@@ -28,12 +29,12 @@ resource "kubernetes_namespace" "irsa" {
   }
 }
 
-resource "kubernetes_service_account" "this" {
+resource "kubernetes_service_account_v1" "this" {
   count = var.irsa_config.create_kubernetes_service_account ? 1 : 0
 
   metadata {
     name        = var.irsa_config.kubernetes_service_account
-    namespace   = try(kubernetes_namespace.irsa[0].metadata[0].name, var.irsa_config.kubernetes_namespace)
+    namespace   = try(kubernetes_namespace_v1.irsa[0].metadata[0].name, var.irsa_config.kubernetes_namespace)
     annotations = var.irsa_config.policies != null ? { "eks.amazonaws.com/role-arn" : module.irsa_role.arn } : null
   }
 
