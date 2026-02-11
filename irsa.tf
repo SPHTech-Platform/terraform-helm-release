@@ -4,7 +4,7 @@ locals {
 
 module "irsa_role" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts"
-  version = "~> 6.0"
+  version = "~> 6.4.0"
 
   create          = var.irsa_config.name != "" ? true : false
   name            = var.irsa_config.name
@@ -15,7 +15,6 @@ module "irsa_role" {
   policies = var.irsa_config.policies
   tags     = var.tags
 }
-
 
 resource "kubernetes_namespace_v1" "irsa" {
   count = local.create_namespace ? 1 : 0

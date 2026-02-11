@@ -1,0 +1,14 @@
+version: 2
+updates:
+  - package-ecosystem: "terraform"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    target-branch: "main"
+    open-pull-requests-limit: 2
+    groups:
+      terraform:
+        applies-to: version-updates
+        update-types:
+          - "minor"
+          - "major"
