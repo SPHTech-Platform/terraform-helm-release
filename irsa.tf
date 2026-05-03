@@ -4,7 +4,7 @@ locals {
 
 module "irsa_role" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts"
-  version = "~> 6.4.0"
+  version = "~> 6.6.0"
 
   create          = var.irsa_config.name != "" ? true : false
   name            = var.irsa_config.name
